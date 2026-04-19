@@ -34,6 +34,7 @@ export default function Dashboard() {
   const [authLoading, setAuthLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
+
   const styles = [
     { id: 'warm', name: '溫暖治癒 ☀️' },
     { id: 'funny', name: '搞笑活力 😂' },
