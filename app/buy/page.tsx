@@ -179,7 +179,7 @@ export default function BuyPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
-      <Header
+      <Header />
         user={user ? {
           email: user.email,
           firstName: user.firstName,
