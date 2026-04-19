@@ -9,7 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-let supabaseInstance = null;
+let supabaseInstance: any = null;
 
 function getSupabase() {
   if (!supabaseInstance && supabaseUrl && supabaseAnonKey) {
@@ -18,12 +18,21 @@ function getSupabase() {
   return supabaseInstance;
 }
 
+interface User {
+  id: string;
+  email?: string;
+  user_metadata?: {
+    first_name?: string;
+    last_name?: string;
+  };
+}
+
 export default function Header() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
-  const [credits, setCredits] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [credits, setCredits] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const setupUser = async () => {
@@ -34,7 +43,7 @@ export default function Header() {
         const { data: { session } } = await supabase.auth.getSession();
         
         if (session?.user) {
-          setUser(session.user);
+          setUser(session.user as User);
           
           // 獲取用戶點數
           const { data, error } = await supabase
@@ -59,9 +68,9 @@ export default function Header() {
     const supabase = getSupabase();
     if (supabase) {
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
-        async (event, session) => {
+        async (event: string, session: any) => {
           if (session?.user) {
-            setUser(session.user);
+            setUser(session.user as User);
             
             // 獲取用戶點數
             const { data } = await supabase
