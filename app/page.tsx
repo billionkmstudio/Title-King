@@ -11,9 +11,9 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export default function Home() {
   const router = useRouter();
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkUser = async () => {
