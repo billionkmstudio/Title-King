@@ -18,15 +18,14 @@ interface Generation {
 export default function Dashboard() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
-  const [userEmail, setUserEmail] = useState('');
-  const [credits, setCredits] = useState(0);
-  const [content, setContent] = useState('');
-  const [selectedStyle, setSelectedStyle] = useState('warm');
-  const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<Generation | null>(null);
-  const [showResults, setShowResults] = useState(false);
-  const [authLoading, setAuthLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [credits, setCredits] = useState<number>(0);
+  const [content, setContent] = useState<string>('');
+  const [selectedStyle, setSelectedStyle] = useState<string>('warm');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [results, setResults] = useState<any>(null);
+  const [showResults, setShowResults] = useState<boolean>(false);
+  const [authLoading, setAuthLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   const styles = [
     { id: 'warm', name: '溫暖治癒 ☀️' },
