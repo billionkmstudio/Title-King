@@ -17,7 +17,7 @@ interface Generation {
 
 export default function Dashboard() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [userEmail, setUserEmail] = useState('');
   const [credits, setCredits] = useState(0);
   const [content, setContent] = useState('');
