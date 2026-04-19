@@ -180,14 +180,6 @@ export default function BuyPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       <Header />
-        user={user ? {
-          email: user.email,
-          firstName: user.firstName,
-          credits: user.credits,
-        } : null}
-        onLogin={() => router.push('/')}
-        onLogout={handleLogout}
-      />
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Current Credits */}
