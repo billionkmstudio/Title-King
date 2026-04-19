@@ -17,13 +17,13 @@ interface Generation {
 
 export default function Dashboard() {
   const router = useRouter();
- const [user, setUser] = useState<any>(null);
-const [userEmail, setUserEmail] = useState<string>('');  // ← 加這行
+ const [user, setUser] = useState<UserType | null>(null);
+const [userEmail, setUserEmail] = useState<string>('');
 const [credits, setCredits] = useState<number>(0);
 const [content, setContent] = useState<string>('');
 const [selectedStyle, setSelectedStyle] = useState<string>('warm');
 const [loading, setLoading] = useState<boolean>(false);
-const [results, setResults] = useState<any>(null);
+const [results, setResults] = useState<Generation | null>(null);
 const [showResults, setShowResults] = useState<boolean>(false);
 const [authLoading, setAuthLoading] = useState<boolean>(true);
 const [error, setError] = useState<string>('');
@@ -59,7 +59,7 @@ const [error, setError] = useState<string>('');
           return;
         }
 
-        setUser(session.user);
+        setUser(session.user as UserType);
         setUserEmail(session.user.email || '');
 
         // 獲取用戶信息和點數
