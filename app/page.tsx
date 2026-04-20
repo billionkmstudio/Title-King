@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/app/components/Header';
+import Footer from '@/app/components/Footer';
 import LoginModal from '@/app/components/LoginModal';
 import { createClient } from '@supabase/supabase-js';
 
@@ -49,7 +50,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-red-50 via-white to-amber-50">
-      <Header />
+      <Header onLoginClick={() => setShowLoginModal(true)} />
       
       {/* Hero Section */}
       <section className="pt-20 pb-16 px-4 md:px-0">
@@ -77,7 +78,10 @@ export default function Home() {
               {loading ? '載入中...' : '立即開始'}
             </button>
             <button
-              onClick={() => router.push('#features')}
+              onClick={() => {
+                const element = document.getElementById('features');
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="px-8 py-4 bg-white text-red-600 border-2 border-red-500 text-lg font-bold rounded-xl hover:bg-red-50 transition-all"
             >
               瞭解更多
@@ -94,12 +98,12 @@ export default function Home() {
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-4xl mb-4">⚡</div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">秒速生成</h3>
-              <p className="text-gray-600">AI 毫秒級生成標題，文案潤色一站式</p>
+              <p className="text-gray-600">AI 毫秒級生成標題,文案潤色一站式</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-4xl mb-4">💰</div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">經濟實惠</h3>
-              <p className="text-gray-600">註冊送 20 點，10 點生成一次標題</p>
+              <p className="text-gray-600">註冊送 20 點,10 點生成一次標題</p>
             </div>
           </div>
         </div>
@@ -109,14 +113,14 @@ export default function Home() {
       <section id="features" className="py-16 px-4 md:px-0 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
-            為什麼選擇標王？
+            為什麼選擇標王?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex gap-4">
               <div className="text-3xl flex-shrink-0">👑</div>
               <div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">專為小紅書優化</h3>
-                <p className="text-gray-600">基於小紅書熱門內容分析，生成更容易爆火的標題</p>
+                <p className="text-gray-600">基於小紅書熱門內容分析,生成更容易爆火的標題</p>
               </div>
             </div>
             <div className="flex gap-4">
@@ -130,14 +134,14 @@ export default function Home() {
               <div className="text-3xl flex-shrink-0">🔄</div>
               <div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">文案潤色</h3>
-                <p className="text-gray-600">不止生成標題，還能潤色您的原文案</p>
+                <p className="text-gray-600">不止生成標題,還能潤色您的原文案</p>
               </div>
             </div>
             <div className="flex gap-4">
               <div className="text-3xl flex-shrink-0">💡</div>
               <div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">易用簡潔</h3>
-                <p className="text-gray-600">無需複雜設定，一鍵生成，直接複製使用</p>
+                <p className="text-gray-600">無需複雜設定,一鍵生成,直接複製使用</p>
               </div>
             </div>
           </div>
@@ -154,7 +158,7 @@ export default function Home() {
             <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-gray-200">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">🎁 新手禮包</h3>
               <p className="text-3xl font-bold text-red-600 mb-4">20 點</p>
-              <p className="text-gray-600 mb-6">註冊即送，足以生成 2 次</p>
+              <p className="text-gray-600 mb-6">註冊即送,足以生成 2 次</p>
               <button
                 onClick={handleStartClick}
                 disabled={loading}
@@ -163,7 +167,7 @@ export default function Home() {
                 已包含
               </button>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-red-500 transform scale-105">
+            <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-red-500 transform scale-105 relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-bold">
                 熱銷
               </div>
@@ -192,15 +196,15 @@ export default function Home() {
             </div>
           </div>
           <p className="text-center text-gray-600 mt-8">
-            💝 點數永不過期，隨時隨地使用
+            💝 點數永不過期,隨時隨地使用
           </p>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 md:px-0 text-center">
+      <section className="py-16 px-4 md:px-0 text-center bg-white">
         <h2 className="text-4xl font-bold mb-6 text-gray-800">
-          準備好成為標題王了嗎？
+          準備好成為標題王了嗎?
         </h2>
         <button
           onClick={handleStartClick}
@@ -210,6 +214,9 @@ export default function Home() {
           {loading ? '載入中...' : '免費開始 (送 20 點)'}
         </button>
       </section>
+
+      {/* Footer */}
+      <Footer />
 
       {/* Login Modal */}
       {showLoginModal && (
