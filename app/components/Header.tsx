@@ -27,7 +27,11 @@ interface User {
   };
 }
 
-export default function Header() {
+interface HeaderProps {
+  onLoginClick?: () => void;
+}
+
+export default function Header({ onLoginClick }: HeaderProps) {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [credits, setCredits] = useState<number>(0);
@@ -108,6 +112,13 @@ export default function Header() {
     }
   };
 
+  const handleLoginClick = () => {
+    setMenuOpen(false);
+    if (onLoginClick) {
+      onLoginClick();
+    }
+  };
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -155,12 +166,6 @@ export default function Header() {
               </Link>
             </>
           )}
-          <Link
-            href="/privacy"
-            className="text-gray-700 hover:text-red-600 font-medium transition-colors"
-          >
-            私隱政策
-          </Link>
         </nav>
 
         {/* Right Section */}
@@ -203,13 +208,13 @@ export default function Header() {
                 </svg>
               </button>
 
-              {/* Desktop Login */}
-              <Link
-                href="/login"
+              {/* Desktop Login - 觸發 Modal，不跳轉路由 */}
+              <button
+                onClick={handleLoginClick}
                 className="hidden md:block px-6 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-lg hover:shadow-lg transition-all"
               >
                 登入/註冊
-              </Link>
+              </button>
             </>
           )}
         </div>
@@ -255,22 +260,15 @@ export default function Header() {
               </>
             ) : (
               <>
-                <Link
-                  href="/login"
+                {/* Mobile Login - 觸發 Modal */}
+                <button
+                  onClick={handleLoginClick}
                   className="w-full px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-lg hover:shadow-lg transition-all text-center"
-                  onClick={() => setMenuOpen(false)}
                 >
                   登入/註冊
-                </Link>
+                </button>
               </>
             )}
-            <Link
-              href="/privacy"
-              className="text-gray-700 hover:text-red-600 font-medium py-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              私隱政策
-            </Link>
           </div>
         </div>
       )}
